@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>miniquery</title>
+    <style media="screen">
+      .container {
+        font-size: 2em;
+      }
+      .shaded {
+        color: gray;
+      }
+    </style>
+    <script src="miniquery.js"></script>
+  </head>
+
+  <body>
+    <h3>Hall of Demos</h3>
+
+    <button type="button" name="button-sweet" onclick="demoSweetSelector()">SweetSelector</button>
+    <button type="button" name="button-dom" onclick="demoDOM()">DOM</button>
+    <button type="button" name="button-event" onclick="demoEventDispatcher()">EventDispatcher</button>
+    <button type="button" name="button-ajax" onclick="demoAjax()">AJAX Request</button>
+    <button type="button" name="button-alias" onclick="demoMiniQuery()">Namespace miniquery</button>
+    <button type="button" name="button-alias" onclick="demoAlias()">Alias $</button>
+
+    <hr>
+
+    <h3>Hall of Elements</h3>
+
+    <div class="container">
+      <div id="eyed">id: eyed</div>
+      <div class="klass">class: klass 1</div>
+      <a class="klass" href="#hello">Hello!</a>
+      <div class="klass">class: klass 2</div>
+    </div>
+
+  </body>
+
+  <script>
+    function demoSweetSelector() {
+      console.log(`SweetSelector.select('#eyed')`)
+      console.log(SweetSelector.select('#eyed'))
+      console.log(`SweetSelector.select('.klass')`)
+      console.log(SweetSelector.select('.klass'))
+      console.log(`SweetSelector.select('a')`)
+      console.log(SweetSelector.select('a'))
+    }
+    function demoDOM() {
+      DOM.hide('.klass')
+      DOM.show('.klass')
+      DOM.removeClass('.klass', 'shaded')
+      DOM.addClass('.klass', 'shaded')
+    }
+    function demoEventDispatcher() {
+      EventDispatcher.on('.klass', 'click', function() {
+        console.log("Awesome")
+      })
+      EventDispatcher.trigger('.klass', 'click')
+    }
+    function demoAjax() {
+      AjaxWrapper.request({
+        url: 'http://swapi.co/api/people/1',
+        type: 'GET',
+        success: function(data) {
+          console.log("Success: ", data)
+        },
+        fail: function() {
+          console.log("ERROR")
+        }
+      })
+    }
+    function demoMiniQuery() {
+      // miniquery
+      miniquery("#eyed").hide()
+      setTimeout(function() {
+        miniquery("#eyed").show()
+      }, 2000)
+    }
+    function demoAlias() {
+      $("#eyed").hide()
+      setTimeout(function() {
+        $("#eyed").show()
+      }, 2000)
+    }
+  </script>
+
+</html>
